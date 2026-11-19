@@ -257,11 +257,11 @@ footer a{color:var(--on-dark)}
 <a class="mail" href="mailto:contact@proxipay.ma">contact@proxipay.ma</a>
 </div>
 
-<form id="form" action="https://formsubmit.co/contact@proxipay.ma" method="POST" novalidate>
-<input type="hidden" name="_subject" value="Nouveau contact depuis proxipay.ma">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_captcha" value="false">
-<input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<form id="form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+<input type="hidden" name="access_key" value="COLLER_ICI_LA_CLE_WEB3FORMS">
+<input type="hidden" name="subject" value="Nouveau contact depuis proxipay.ma">
+<input type="hidden" name="from_name" value="Site proxipay.ma">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 <div class="f"><label for="nom"><span class="ar">السمية</span><span class="fr">Nom et prénom</span></label><input id="nom" name="Nom" autocomplete="name" required></div>
 <div class="f"><label for="tel"><span class="ar">رقم التيليفون</span><span class="fr">Téléphone</span></label><input id="tel" name="Telephone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="06 00 00 00 00" required></div>
 <div class="f"><label for="profil"><span class="ar">نتا</span><span class="fr">Vous êtes</span></label>
@@ -312,6 +312,7 @@ footer a{color:var(--on-dark)}
     missing: {ar:'عمّر السمية، رقم التيليفون، وقبل الشرط.', fr:'Indiquez votre nom et votre téléphone, et cochez la case d’accord.'},
     sending: {ar:'كنصيفطو…', fr:'Envoi en cours…'},
     ok:      {ar:'توصلنا بالمعلومات ديالك. غادي نعيطو ليك قريب.', fr:'C’est reçu. Nous vous rappelons très vite.'},
+    activate:{ar:'الاستمارة خاصها تتفعّل: شوف الإيميل ديال contact@proxipay.ma.', fr:'Formulaire en cours d’activation : un e-mail de confirmation a été envoyé à contact@proxipay.ma.'},
     ko:      {ar:'ما تصيفطش. عاود من بعد ولا كتب لينا فـ contact@proxipay.ma', fr:'L’envoi n’a pas abouti. Réessayez plus tard ou écrivez à contact@proxipay.ma'}
   };
   var form = document.getElementById('form'), status = document.getElementById('status');
@@ -320,10 +321,15 @@ footer a{color:var(--on-dark)}
     ev.preventDefault();
     if (!form.Nom.value.trim() || !form.Telephone.value.trim() || !document.getElementById('ok').checked){ say('missing','ko'); return; }
     var btn = form.querySelector('.send'); btn.disabled = true; say('sending');
-    fetch('https://formsubmit.co/ajax/contact@proxipay.ma', {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)})
-      .then(function(r){ return r.json().then(function(j){ if (!r.ok || String(j.success) !== 'true') throw 0; }); })
-      .then(function(){ form.reset(); apply(html.lang); say('ok','ok'); })
-      .catch(function(){ say('ko','ko'); })
+    fetch('https://api.web3forms.com/submit', {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)})
+      .then(function(r){ return r.json().then(function(j){
+        if (r.ok && String(j.success) === 'true') return 'ok';
+        var m = String(j.message || '');
+        if (/activat/i.test(m)) return 'activate';
+        throw new Error(m || ('HTTP ' + r.status));
+      }); })
+      .then(function(res){ if (res === 'ok'){ form.reset(); apply(html.lang); } say(res, 'ok'); })
+      .catch(function(e){ if (window.console) console.warn('ProxiPay formulaire :', e); say('ko','ko'); })
       .then(function(){ btn.disabled = false; });
   });
 })();
