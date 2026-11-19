@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProxiPay – ديما معاك</title>
+<meta name="description" content="ProxiPay : la recharge, la caisse et le Konach du hanout dans un seul téléphone. التعبئة، الصندوق والكناش ديال الحانوت فتيليفون واحد.">
+<meta property="og:title" content="ProxiPay – ديما معاك">
+<meta property="og:description" content="La recharge, la caisse et le Konach du hanout dans un seul téléphone.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://proxipay.ma/">
+<meta name="theme-color" content="#0A2540">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M50 112 C38 92 12 72 12 42 A38 38 0 1 1 88 42 C88 72 62 92 50 112 Z' fill='%230A2540'/%3E%3Crect x='31' y='25' width='11' height='52' rx='2' fill='%23fff'/%3E%3Ccircle cx='53' cy='42' r='12' fill='none' stroke='%23fff' stroke-width='10'/%3E%3Ccircle cx='53' cy='42' r='7' fill='%2300D4B2'/%3E%3Cpath d='M92.6 12.2 A52 52 0 0 1 92.6 71.8' fill='none' stroke='%2300D4B2' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M107.2 9 A66 66 0 0 1 107.2 75' fill='none' stroke='%2300D4B2' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+:root{
+  --navy:#0A2540; --navy-2:#123354; --mint:#00D4B2; --mint-ink:#00806B;
+  --yellow:#FFC83D; --ground:#F4F7FA; --paper:#FFFFFF; --line:#D9E2EA;
+  --ink:#0A2540; --soft:#4A5B6E; --on-dark:#C3D3E2; --warn:#B26A00;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'Tajawal',Tahoma,sans-serif;font-size:19px;line-height:1.7}
+html[lang="fr"] body{font-family:'Plus Jakarta Sans',Arial,sans-serif;font-size:17px;line-height:1.65}
+html[lang="ar"] .fr{display:none!important}
+html[lang="fr"] .ar{display:none!important}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--mint-ink)}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* En-tête */
+header{background:var(--ground)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.01em}
+.bar-end{display:flex;align-items:center;gap:20px}
+.bar-end a{color:var(--ink);text-decoration:none;font-weight:700;font-size:16px}
+.lang{border:0;background:none;color:var(--ink);font:inherit;font-weight:700;font-size:16px;cursor:pointer;padding:8px 0;text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--mint)}
+
+/* Accroche */
+.hero{padding:36px 0 0;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:end}
+.hero h1{font-weight:800;font-size:clamp(40px,6.4vw,76px);line-height:1.08;margin:0 0 22px;letter-spacing:-.01em}
+html[lang="fr"] .hero h1{font-size:clamp(36px,5.4vw,64px);letter-spacing:-.025em}
+.hero p{font-size:21px;color:var(--soft);max-width:30em;margin:0 0 30px}
+html[lang="fr"] .hero p{font-size:19px}
+.hero .go{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;font-weight:800;padding:16px 26px;border-radius:12px;font-size:18px}
+.hero .go:hover{background:var(--navy-2)}
+.hero .aside{margin-top:14px;font-size:16px;color:var(--soft)}
+.hero-text{padding-bottom:72px}
+
+.scene{position:relative;height:560px}
+.phone{position:absolute;bottom:-90px;inset-inline-end:0;width:300px;border-radius:40px;background:var(--navy);padding:10px;box-shadow:0 24px 50px rgba(10,37,64,.22)}
+.phone img{border-radius:31px}
+.ticket{position:absolute;bottom:24px;inset-inline-start:0;width:250px;background:var(--paper);padding:10px 8px 22px;transform:rotate(-4deg);box-shadow:0 14px 30px rgba(10,37,64,.18);z-index:2;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;
+          mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%}
+html[dir="ltr"] .ticket{transform:rotate(4deg)}
+
+/* Journée */
+.day{background:var(--paper);padding:88px 0 40px;border-top:1px solid var(--line)}
+.day h2,.next h2,.faq h2,.contact h2{font-weight:800;font-size:clamp(30px,4vw,44px);line-height:1.2;margin:0 0 10px}
+.day .intro{color:var(--soft);margin:0 0 56px;max-width:34em}
+.moment{display:grid;grid-template-columns:120px 1fr 300px;gap:32px;align-items:start;padding:44px 0;border-top:1px solid var(--line)}
+.moment time{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:34px;color:var(--mint-ink);line-height:1;direction:ltr;unicode-bidi:isolate}
+.moment h3{margin:0 0 10px;font-size:26px;font-weight:800;line-height:1.3}
+.moment p{margin:0;color:var(--soft);max-width:30em}
+.shot{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--ground)}
+.figures{display:flex;gap:28px;flex-wrap:wrap;margin-top:18px}
+.figures div{border-inline-start:3px solid var(--yellow);padding-inline-start:12px}
+.figures strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:800;direction:ltr;unicode-bidi:isolate;text-align:start}
+.figures span{font-size:15px;color:var(--soft)}
+.note{font-size:15px;color:var(--soft);margin-top:28px}
+
+/* Ce qui arrive */
+.next{padding:84px 0}
+.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.next ul{list-style:none;padding:0;margin:24px 0 0}
+.next li{padding:18px 0;border-bottom:1px solid var(--line)}
+.next li b{display:block;font-size:20px}
+.next li span{color:var(--soft)}
+.soon{display:inline-block;background:var(--yellow);color:var(--navy);font-size:13px;font-weight:800;border-radius:6px;padding:1px 8px;margin-inline-start:8px;vertical-align:middle}
+
+/* FAQ */
+.faq{padding:0 0 84px}
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq summary{font-weight:700;font-size:20px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:800;color:var(--mint-ink);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:10px 0 0;color:var(--soft);max-width:38em}
+
+/* Contact */
+.contact{background:var(--navy);color:#fff;padding:84px 0}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px}
+.contact .lead{color:var(--on-dark);margin:0 0 24px}
+.contact .mail{color:#fff;font-weight:700;font-size:20px;text-decoration-color:var(--mint);text-underline-offset:6px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f.full{grid-column:1/-1}
+label{font-size:15px;font-weight:700;color:var(--on-dark)}
+input,select,textarea{font:inherit;font-size:17px;color:var(--ink);background:#fff;border:2px solid transparent;border-radius:10px;padding:12px 14px;min-height:50px;width:100%}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--mint)}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--on-dark);font-weight:400}
+.check input{width:22px;height:22px;min-height:0;margin-top:3px;flex:none;accent-color:var(--mint)}
+button.send{grid-column:1/-1;justify-self:start;border:0;background:var(--mint);color:var(--navy);font:inherit;font-weight:800;font-size:18px;padding:15px 28px;border-radius:12px;cursor:pointer}
+button.send:hover{background:#2be0c2}
+button.send[disabled]{opacity:.6;cursor:wait}
+.hp{position:absolute;inset-inline-start:-9999px}
+.status{grid-column:1/-1;margin:0;font-weight:700;min-height:1.6em}
+.status.ok{color:var(--mint)} .status.ko{color:var(--yellow)}
+
+footer{background:#061a2e;color:var(--on-dark);padding:30px 0;font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer a{color:var(--on-dark)}
+
+@media (max-width:900px){
+  .bar-end a{display:none}
+  .hero-grid,.next-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-text{padding-bottom:12px}
+  .scene{height:380px;max-width:420px;margin:0 auto;width:100%}
+  .phone{width:240px;bottom:-150px}
+  .ticket{width:190px;bottom:20px}
+  .moment{grid-template-columns:1fr;gap:14px;padding:36px 0}
+  .moment .shot{max-width:300px}
+  form{grid-template-columns:1fr}
+  .day,.next,.contact{padding-top:60px;padding-bottom:60px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="wrap bar">
+<a class="brand" href="#" aria-label="ProxiPay">
+<svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true"><path d="M50 112 C38 92 12 72 12 42 A38 38 0 1 1 88 42 C88 72 62 92 50 112 Z" fill="#0A2540"/><rect x="31" y="25" width="11" height="52" rx="2" fill="#fff"/><circle cx="53" cy="42" r="12" fill="none" stroke="#fff" stroke-width="10"/><circle cx="53" cy="42" r="7" fill="#00D4B2"/><path d="M92.6 12.2 A52 52 0 0 1 92.6 71.8" fill="none" stroke="#00D4B2" stroke-width="8" stroke-linecap="round"/><path d="M107.2 9 A66 66 0 0 1 107.2 75" fill="none" stroke="#00D4B2" stroke-width="8" stroke-linecap="round"/></svg>
+<b>ProxiPay</b>
+</a>
+<div class="bar-end">
+<a href="#journee"><span class="ar">كيفاش كيخدم</span><span class="fr">Comment ça marche</span></a>
+<a href="#contact"><span class="ar">تواصل معانا</span><span class="fr">Contact</span></a>
+<button class="lang" id="lang" type="button"><span class="ar" lang="fr">Français</span><span class="fr" lang="ar">العربية</span></button>
+</div>
+</div>
+</header>
+
+<main>
+<section class="hero">
+<div class="wrap hero-grid">
+<div class="hero-text">
+<h1><span class="ar">التعبئة، الصندوق والكناش ديال الحانوت، فتيليفون واحد.</span><span class="fr">La recharge, la caisse et le Konach du hanout, dans un seul téléphone.</span></h1>
+<p><span class="ar">ProxiPay تطبيق مصاوب للحوانت ديال الحومة: كتعبّي للكليان وكتربح فكل تعبئة، كتسجّل المبيعات، والكريدي ديال الناس ما بقاش فالورقة.</span><span class="fr">ProxiPay est une application pensée pour les commerces de quartier : vous rechargez vos clients et gagnez sur chaque recharge, vous enregistrez vos ventes, et le crédit des clients ne se perd plus sur un bout de papier.</span></p>
+<a class="go" href="#contact"><span class="ar">سجّل الحانوت ديالك</span><span class="fr">Inscrire mon commerce</span></a>
+<p class="aside"><span class="ar">ديما معاك · الوكيل ديالنا كيجي حتى لعندك</span><span class="fr">Un agent ProxiPay vient vous installer sur place.</span></p>
+</div>
+<div class="scene" aria-hidden="true">
+<div class="ticket">
+<img class="ar" src="img/receipt-topup-ar.webp" alt="" width="720" height="788">
+<img class="fr" src="img/receipt-topup-fr.webp" alt="" width="720" height="782">
+</div>
+<div class="phone">
+<img class="ar" src="img/accueil-ar.webp" alt="" width="720" height="1480">
+<img class="fr" src="img/accueil-fr.webp" alt="" width="720" height="1480">
+</div>
+</div>
+</div>
+</section>
+
+<section class="day" id="journee">
+<div class="wrap">
+<h2><span class="ar">نهار عادي فالحانوت</span><span class="fr">Une journée ordinaire au hanout</span></h2>
+<p class="intro"><span class="ar">ما تبدّلش الطريقة ديال الخدمة ديالك. ProxiPay كيتبعك من الصباح حتى تسدّ.</span><span class="fr">Vous gardez vos habitudes. ProxiPay vous suit de l’ouverture à la fermeture.</span></p>
+
+<article class="moment">
+<time>08:30</time>
+<div>
+<h3><span class="ar">جارك بغا يعبّي 50 درهم</span><span class="fr">Un voisin veut une recharge de 50 DH</span></h3>
+<p><span class="ar">كتختار الشركة، كتكتب الرقم ولا كتختارو من المفضلين، وكتأكد بالبصمة. الكليان كيوصلو الوصل، ونتا كيتزاد ليك الربح ديالك فالحين.</span><span class="fr">Vous choisissez l’opérateur, tapez le numéro ou le prenez dans vos favoris, et validez avec l’empreinte. Le client reçoit son reçu, votre gain est crédité tout de suite.</span></p>
+</div>
+<div class="shot">
+<img class="ar" src="img/receipt-topup-ar.webp" alt="وصل ديال تعبئة 50 درهم" width="720" height="788" loading="lazy">
+<img class="fr" src="img/receipt-topup-fr.webp" alt="Reçu d’une recharge de 50 DH" width="720" height="782" loading="lazy">
+</div>
+</article>
+
+<article class="moment">
+<time>13:00</time>
+<div>
+<h3><span class="ar">مول الدار خدا الخبز والحليب، وغادي يخلّص آخر الشهر</span><span class="fr">Le pain et le lait à crédit, payés en fin de mois</span></h3>
+<p><span class="ar">كتزيدها فالكناش. ملي يجي يخلّص، كتنقص من الحساب ديالو، وتقدر تصيفط ليه الكشف باش يشوف شحال باقي عليه.</span><span class="fr">Vous l’ajoutez au Konach. Quand il rembourse, le compte se met à jour, et vous pouvez lui envoyer son relevé pour qu’il voie ce qu’il reste à payer.</span></p>
+</div>
+<div class="shot">
+<img class="ar" src="img/konach-client-ar.webp" alt="حساب كليان فالكناش" width="800" height="900" loading="lazy">
+<img class="fr" src="img/konach-client-fr.webp" alt="Compte d’un client dans le Konach" width="800" height="900" loading="lazy">
+</div>
+</article>
+
+<article class="moment">
+<time>21:00</time>
+<div>
+<h3><span class="ar">كتسدّ الصندوق وكتعرف فين وصلتي</span><span class="fr">Vous fermez la caisse et vous savez où vous en êtes</span></h3>
+<p><span class="ar">المبيعات ديال النهار، الكريدي اللي عند الناس، والربح ديال الشهر، كلشي فالشاشة اللولة. حتى بلا أنترنيت، الصندوق والكناش كيخدمو.</span><span class="fr">Les ventes du jour, le crédit en cours et le gain du mois, tout est sur l’écran d’accueil. Même sans connexion, la caisse et le Konach continuent de fonctionner.</span></p>
+<div class="figures">
+<div><strong>640,00 DH</strong><span><span class="ar">مبيعات اليوم</span><span class="fr">Ventes du jour</span></span></div>
+<div><strong>1 280,00 DH</strong><span><span class="ar">ديون الكناش</span><span class="fr">Crédit Konach</span></span></div>
+<div><strong>186,00 DH</strong><span><span class="ar">ربح الشهر</span><span class="fr">Gain du mois</span></span></div>
+</div>
+</div>
+<div></div>
+</article>
+<p class="note"><span class="ar">الأرقام والسميات اللي فالصور ديال حانوت تجريبي.</span><span class="fr">Les chiffres et les noms des captures viennent d’un commerce de démonstration.</span></p>
+</div>
+</section>
+
+<section class="next">
+<div class="wrap next-grid">
+<div>
+<h2><span class="ar">للحوانت الكبار والشبكات</span><span class="fr">Pour les plus grands commerces</span></h2>
+<p style="color:var(--soft);margin:0"><span class="ar">عندك بزاف ديال الصناديق ولا بزاف ديال الحوانت؟ ProxiPay كيكبر معاك.</span><span class="fr">Plusieurs caisses, ou plusieurs boutiques ? ProxiPay suit votre organisation.</span></p>
+<ul>
+<li><b><span class="ar">كل صندوق بالحد ديالو</span><span class="fr">Une limite par caisse</span><span class="soon"><span class="ar">قريباً</span><span class="fr">Bientôt</span></span></b><span><span class="ar">كتختار شنو يقدر يدير كل بيّاع، وشحال يقدر يصرف فالنهار.</span><span class="fr">Vous décidez ce que chaque vendeur peut faire, et combien il peut dépenser par jour.</span></span></li>
+<li><b><span class="ar">رصيد واحد لجميع الحوانت</span><span class="fr">Un solde pour toutes vos boutiques</span><span class="soon"><span class="ar">قريباً</span><span class="fr">Bientôt</span></span></b><span><span class="ar">كتوزّع الرصيد على الحوانت ديالك وكتشوف الحصيلة ديالهم فبلاصة وحدة.</span><span class="fr">Vous répartissez le solde entre vos boutiques et suivez leurs résultats au même endroit.</span></span></li>
+</ul>
+</div>
+<div>
+<h2><span class="ar">جاي من بعد</span><span class="fr">La suite</span></h2>
+<p style="color:var(--soft);margin:0"><span class="ar">باش الكليان يلقاو عندك كثر ما كيلقاو.</span><span class="fr">Pour que vos clients trouvent encore plus de services chez vous.</span></p>
+<ul>
+<li><b><span class="ar">خلاص الفواتير</span><span class="fr">Paiement des factures</span><span class="soon"><span class="ar">قريباً</span><span class="fr">Bientôt</span></span></b><span><span class="ar">الماء، الضو، التيليفون والفينيت.</span><span class="fr">Eau, électricité, téléphone et vignette.</span></span></li>
+<li><b><span class="ar">البطاقات والقسائم</span><span class="fr">Cartes et bons</span><span class="soon"><span class="ar">قريباً</span><span class="fr">Bientôt</span></span></b><span><span class="ar">بطاقات الألعاب والهدايا، بربح جديد ليك.</span><span class="fr">Cartes de jeu et cartes cadeaux, avec un gain de plus pour vous.</span></span></li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="faq">
+<div class="wrap">
+<h2><span class="ar">سولونا بزاف على</span><span class="fr">On nous demande souvent</span></h2>
+<details><summary><span class="ar">واش خاصني تيليفون جديد؟</span><span class="fr">Faut-il un téléphone récent ?</span></summary><p><span class="ar">لا، تيليفون أندرويد عادي كافي.</span><span class="fr">Non, un téléphone Android courant suffit.</span></p></details>
+<details><summary><span class="ar">كيفاش كنعمّر الرصيد؟</span><span class="fr">Comment alimenter mon solde ?</span></summary><p><span class="ar">عند الوكيل ديال ProxiPay اللي كيدوز عندك، بكود ولا QR فالتطبيق.</span><span class="fr">Auprès de l’agent ProxiPay qui passe chez vous, avec un code ou un QR dans l’application.</span></p></details>
+<details><summary><span class="ar">الفلوس ديال الصندوق والكناش فين كيمشيو؟</span><span class="fr">L’argent de la caisse et du Konach, où va-t-il ?</span></summary><p><span class="ar">كيبقاو عندك. ProxiPay كيعاونك تحسب وتنظّم، ما كياخدش الفلوس ديال المبيعات ديالك.</span><span class="fr">Il reste chez vous. ProxiPay vous aide à compter et à vous organiser ; il ne touche pas à l’argent de vos ventes.</span></p></details>
+<details><summary><span class="ar">نسيت كلمة السر، شنو ندير؟</span><span class="fr">J’ai oublié mon mot de passe ?</span></summary><p><span class="ar">طلب من التطبيق، والوكيل ديالك كيعيط ليك وكيعطيك كود باش تبدّلها.</span><span class="fr">Faites la demande dans l’application : votre agent vous appelle et vous donne un code pour le changer.</span></p></details>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="wrap contact-grid">
+<div>
+<h2><span class="ar">خلّي لينا المعلومات ديالك</span><span class="fr">Laissez-nous vos coordonnées</span></h2>
+<p class="lead"><span class="ar">تاجر، شريك ولا غير عندك سؤال: عمّر الاستمارة ونعيطو ليك.</span><span class="fr">Commerçant, partenaire ou simple question : remplissez le formulaire, nous vous rappelons.</span></p>
+<p class="lead" style="margin-bottom:8px"><span class="ar">ولا كتب لينا مباشرة:</span><span class="fr">Ou écrivez-nous directement :</span></p>
+<a class="mail" href="mailto:contact@proxipay.ma">contact@proxipay.ma</a>
+</div>
+
+<form id="form" action="https://formsubmit.co/contact@proxipay.ma" method="POST" novalidate>
+<input type="hidden" name="_subject" value="Nouveau contact depuis proxipay.ma">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="false">
+<input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="f"><label for="nom"><span class="ar">السمية</span><span class="fr">Nom et prénom</span></label><input id="nom" name="Nom" autocomplete="name" required></div>
+<div class="f"><label for="tel"><span class="ar">رقم التيليفون</span><span class="fr">Téléphone</span></label><input id="tel" name="Telephone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="06 00 00 00 00" required></div>
+<div class="f"><label for="profil"><span class="ar">نتا</span><span class="fr">Vous êtes</span></label>
+<select id="profil" name="Profil">
+<option value="Commerçant" data-ar="مول الحانوت">Commerçant</option>
+<option value="Commerçant avec plusieurs boutiques" data-ar="عندي بزاف ديال الحوانت">Commerçant avec plusieurs boutiques</option>
+<option value="Partenaire" data-ar="شريك (شركة)">Partenaire (entreprise)</option>
+<option value="Autre" data-ar="حاجة أخرى">Autre</option>
+</select></div>
+<div class="f"><label for="ville"><span class="ar">المدينة والحي</span><span class="fr">Ville et quartier</span></label><input id="ville" name="Ville" autocomplete="address-level2"></div>
+<div class="f full"><label for="email"><span class="ar">الإيميل (إلا عندك)</span><span class="fr">E-mail (facultatif)</span></label><input id="email" name="email" type="email" autocomplete="email" dir="ltr"></div>
+<div class="f full"><label for="msg"><span class="ar">بغيتي تزيد شي حاجة؟</span><span class="fr">Un message ? (facultatif)</span></label><textarea id="msg" name="Message"></textarea></div>
+<label class="check f full"><input type="checkbox" id="ok" required><span><span class="ar">كنقبل ProxiPay يستعمل هاد المعلومات غير باش يتواصل معايا.</span><span class="fr">J’accepte que ProxiPay utilise ces informations uniquement pour me recontacter.</span> <a href="#" style="color:var(--on-dark)"><span class="ar">المعطيات الشخصية</span><span class="fr">Données personnelles</span></a></span></label>
+<button class="send" type="submit"><span class="ar">صيفط</span><span class="fr">Envoyer</span></button>
+<p class="status" id="status" role="status" aria-live="polite"></p>
+</form>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+<span>© <span id="year">2026</span> ProxiPay, <span class="ar">منتوج ديال</span><span class="fr">une solution de</span> BITS</span>
+<span><a href="#">[Mentions légales]</a> &nbsp; <a href="#">[Données personnelles – CNDP]</a> &nbsp; <a href="mailto:contact@proxipay.ma">contact@proxipay.ma</a></span>
+</div>
+</footer>
+
+<script>
+(function(){
+  var html = document.documentElement;
+  var sel = document.getElementById('profil');
+  var frLabels = [].map.call(sel.options, function(o){ return o.textContent; });
+  function apply(l){
+    html.lang = l; html.dir = (l === 'ar') ? 'rtl' : 'ltr';
+    [].forEach.call(sel.options, function(o, i){ o.textContent = (l === 'ar') ? o.dataset.ar : frLabels[i]; });
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('pp-lang'); } catch(e) {}
+  apply(saved === 'fr' ? 'fr' : 'ar');
+  document.getElementById('lang').addEventListener('click', function(){
+    var next = html.lang === 'ar' ? 'fr' : 'ar';
+    apply(next);
+    try { localStorage.setItem('pp-lang', next); } catch(e) {}
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var T = {
+    missing: {ar:'عمّر السمية، رقم التيليفون، وقبل الشرط.', fr:'Indiquez votre nom et votre téléphone, et cochez la case d’accord.'},
+    sending: {ar:'كنصيفطو…', fr:'Envoi en cours…'},
+    ok:      {ar:'توصلنا بالمعلومات ديالك. غادي نعيطو ليك قريب.', fr:'C’est reçu. Nous vous rappelons très vite.'},
+    ko:      {ar:'ما تصيفطش. عاود من بعد ولا كتب لينا فـ contact@proxipay.ma', fr:'L’envoi n’a pas abouti. Réessayez plus tard ou écrivez à contact@proxipay.ma'}
+  };
+  var form = document.getElementById('form'), status = document.getElementById('status');
+  function say(k, cls){ status.textContent = T[k][html.lang]; status.className = 'status ' + (cls || ''); }
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if (!form.Nom.value.trim() || !form.Telephone.value.trim() || !document.getElementById('ok').checked){ say('missing','ko'); return; }
+    var btn = form.querySelector('.send'); btn.disabled = true; say('sending');
+    fetch('https://formsubmit.co/ajax/contact@proxipay.ma', {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)})
+      .then(function(r){ return r.json().then(function(j){ if (!r.ok || String(j.success) !== 'true') throw 0; }); })
+      .then(function(){ form.reset(); apply(html.lang); say('ok','ok'); })
+      .catch(function(){ say('ko','ko'); })
+      .then(function(){ btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>
